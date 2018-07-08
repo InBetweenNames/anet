@@ -20,11 +20,11 @@ echo "gtest"
 ( cd ../../demo/gtest ; sh build $1 ) || die
 
 # Bench
-#echo "bench..."
-#( cd ../test/bench ; sh build $1 ) || die
-#install -d ${BUILD}/bench
-#install -m 0644 ../test/bench/*.pr ${BUILD}/bench
-#install ${BUILD}/bin/bench* ${BUILD}/bench 
+echo "bench..."
+( cd ../test/bench ; sh build $1 ) || die
+install -d ${BUILD}/bench
+install -m 0644 ../test/bench/*.pr ${BUILD}/bench
+install ${BUILD}/bin/bench* ${BUILD}/bench 
 
 # Load
 echo "load"
@@ -34,7 +34,7 @@ install -m 0644 ../test/load/*.ini ${BUILD}/load
 install ${BUILD}/bin/load* ${BUILD}/load
 
 # Crash monitor
-##echo "Crash Monitor"
+#echo "Crash Monitor"
 #( cd ../aeh/analaeh ; sh build $1 ) || die
 #install -d ${BUILD}/crash
 #install crash/* ${BUILD}/crash

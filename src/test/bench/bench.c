@@ -878,26 +878,7 @@ static prog_cmd_res_t benchCmd_dpGetStats(prog_process_t *process, const char *p
 }
 
 /* Convert a key to ASCII for debug printing */
-static char *key2buf(const char *key, int keylen, char *buf)
-{
-	int i;
-
-	if (keylen > dp_KEY_MAXLEN)
-		return "key too long";
-
-	buf[0] = 0;
-	for (i=0; i<keylen; i++) {
-		/* DPRINT(("key[%d] %d\n", i, key[i])); */
-		sprintf(buf + strlen(buf), "%d%s", 255 & key[i], (i == (keylen-1)) ? "" : ".");
-	}
-	return buf;
-}
-
 /* Convert a key to ASCII for debug printing */
-static char key2a_buf[256];
-static char key2a_buf2[256];
-static char key2a_buf3[256];
-
 /*--------------------------------------------------------------------------
  convert a dp_playerId_t to ASCII
 --------------------------------------------------------------------------*/
