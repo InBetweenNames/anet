@@ -174,6 +174,7 @@ typedef struct {
 /*-------------------------------------------------------------------------
  DPRINT an ip address as ascii string (eg. 255.255.255.255)
 -------------------------------------------------------------------------*/
+#if 0
 static void printAdr(addr_t* adr)
 {
 	DPRINT(("%d.%d.%d.%d:%d",
@@ -184,6 +185,7 @@ static void printAdr(addr_t* adr)
 		adr->port));
 	(void) adr;
 }
+#endif
 
 
 /*-------------------------------------------------------------------------
@@ -349,7 +351,6 @@ commInit(
 	sockaddr_in sockAddr;
 	commInitResp_t respDummy;
 	addr_t addr;
-	uudps_peer2_t addr2;
 	u_short port;	/* in host byte ordering */
 	comm_t	*comm = (comm_t *) commPtr;
 
@@ -431,10 +432,10 @@ commInit(
 
 	/* determine the actual port number */
 	if(UUDP_SOCKET_ANY == port) {
-		int addrlen = sizeof(sockAddr);
+		socklen_t addrlen = sizeof(sockAddr);
 		int err;
 		memset(&sockAddr, 0, sizeof(sockAddr));
-		err = getsockname(comm->uudp_sock, (sockaddr*)&sockAddr, (int *)&addrlen);
+		err = getsockname(comm->uudp_sock, (sockaddr*)&sockAddr, &addrlen);
 		if(SOCKET_ERROR == err)
 			err = errno;
 		else
@@ -794,7 +795,7 @@ commRxPkt(
 	sockaddr_in sockAddr;
 	addr_t addr;
 	size_t nBytes;
-	int fromlen;
+	socklen_t fromlen;
 
 	/* Protect against invalid arguments */
 	assert(validateComm(comm));
@@ -830,7 +831,7 @@ commRxPkt(
 	fromlen = sizeof(sockAddr);
 	nBytes = recvfrom(comm->uudp_sock, req->buffer, req->size, 0,
 			(sockaddr *)&sockAddr, &fromlen);
-	/*DPRINT(("commRxPkt: recvfrom(%d,,%d,0,,%d) returns %d.\n", uudp_sock, req->size, fromlen, nBytes));*/
+	DPRINT(("commRxPkt: recvfrom(%d,,%d,0,,%d) returns %d.\n", comm->uudp_sock, req->size, fromlen, nBytes));
 	if (nBytes == -1) {
 		resp->status = comm_STATUS_EMPTY;
 		if (errno != EWOULDBLOCK) {
@@ -851,7 +852,7 @@ commRxPkt(
 			short players;
 			short cur_players = SwapBytes2(comm->sessinfo->cur_players);
 			short max_players = SwapBytes2(comm->sessinfo->max_players);
-			char *p = pkt->data + (pkt->len - sizeof(dp_species_t));
+			unsigned char *p = pkt->data + (pkt->len - sizeof(dp_species_t));
 			dp_species_t sessType = SwapBytes2(*((dp_species_t*)p));
 			players = SwapBytes2((comm->sessinfo->players)[sessType]);
 			p += sizeof(dp_species_t); *((short *)p) = cur_players;
@@ -937,7 +938,7 @@ commScanAddr(
 	for(pc = req->printable; *pc != '\0'; pc++) {
 		if(':' == *pc) {
 			*pc = '\0';
-			*pc++;
+			++pc;
 			if(*pc != '\0')
 				port = (unsigned short) atoi(pc);
 			break;

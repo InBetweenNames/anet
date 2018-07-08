@@ -144,8 +144,8 @@ install -d ${BUILD}/anetmon
 install -m 0644 anetmon/*.in anetmon/*.txt anetmon/*.java ${BUILD}/anetmon
 install -m 0644 anetmon/crontab.lst anetmon/anetmonenv ${BUILD}/anetmon
 install -m 0755 anetmon/*.pl anetmon/*.sh ${BUILD}/anetmon
-install -d ${BUILD}/anetmon/load
-install -m 0755 ${BUILD}/bin/load ${BUILD}/anetmon/load
+install -d ${BUILD}/anetmon/load*
+install -m 0755 ${BUILD}/bin/load* ${BUILD}/anetmon/load
 
 # Package everything into linux86.zip
 (

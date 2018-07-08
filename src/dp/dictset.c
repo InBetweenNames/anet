@@ -576,7 +576,7 @@ dcstFreeze(
 	(void) fp;
 
 	/* Check postconditions */
-	/*dcst_ASSERTVALID(pDcst);			/* set rendered invalid */
+	/*dcst_ASSERTVALID(pDcst);			//set rendered invalid */
 
 	return dcst_STATUS_DEFERRED;
 }
@@ -598,7 +598,7 @@ dcstThaw(
 	(void) fp;
 
 	/* Check postconditions */
-	/*dcst_ASSERTVALID(pDcst);					/* set restored to invalid state */
+	/*dcst_ASSERTVALID(pDcst);					// set restored to invalid state */
 
 	return dcst_STATUS_DEFERRED;
 }

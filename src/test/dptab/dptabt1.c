@@ -40,7 +40,7 @@ int nextid = 1;
 int checklocal = TRUE;
 
 /* Use -v on command line to activate verbose printing */
-int Verbose = FALSE;
+int Verbose = TRUE;
 
 /*--------------------------------------------------------------------------
  Structure holding the state of a dptab test object.
