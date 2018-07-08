@@ -222,6 +222,7 @@ typedef unsigned long	playerHdl_t;		/* Handle for a player or group */
 /* The largest possible address */
 #define comm_MAX_ADR_LEN 10	/*  Size of ipx's fullNetworkAddr_t. */
 
+#include <stdint.h>
 
 /*
  * commAlloc
@@ -334,7 +335,7 @@ typedef struct {			/* Request (filled in by caller) */
 	char	*phonenum;
 	char	*modeministr;
 	long	flags;			/* controls whether to dial and/or test */
-	long	dialing_method;	/* parameter to HMSetDialingMethod */
+	intptr_t dialing_method;	/* parameter to HMSetDialingMethod */
 } commInitReq_t;
 
 typedef struct {
@@ -945,9 +946,9 @@ commGroupSubtract(
 
 typedef struct {
 	size_t			reqLen;		/* sizeof(commSetParamReq_t) */
-	long param_num;				/* parameter to set */
-	long param_value;			/* value to set it to */
-	long param_value2;			/* second part of value, if needed */
+	intptr_t param_num;				/* parameter to set */
+	intptr_t param_value;			/* value to set it to */
+	intptr_t param_value2;			/* second part of value, if needed */
 } commSetParamReq_t;
 
 /* Note: You must set respLen before calling commSetParam!
@@ -957,9 +958,9 @@ typedef struct {
 typedef struct {
 	comm_status_t		status;		/* contains comm_STATUS_* describing error */
 	size_t respLen;				/* sizeof(commSetParamResp_t) */
-	long param_num;				/* parameter that was to be set */
-	long param_value;			/* its new value */
-	long param_value2;			/* second part of value, if needed */
+  intptr_t param_num;				/* parameter that was to be set */
+	intptr_t param_value;			/* its new value */
+	intptr_t param_value2;			/* second part of value, if needed */
 } commSetParamResp_t;
 
 /* info sent by server to pinging hosts */

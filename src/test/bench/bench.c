@@ -30,9 +30,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
+#include <ctype.h>
+#include <stdint.h>
 
 /* #include "anet.h" */
 #include "dp2.h"
+#include "dpprivy.h"
 #include "eclock.h"
 #include "logpkt.h"	/* for logPkt_getFilename */
 
@@ -123,7 +126,7 @@ static int				bench_exitcode = -1;
 static unsigned long	bench_starttime;
 static bench_stat_t		bench_stats;
 static unsigned long	bench_maxexec;
-static int				bench_globals[bench_NUM_GLOBALS];
+static intptr_t				bench_globals[bench_NUM_GLOBALS];
 
 /* 
  * prototypes 
@@ -138,8 +141,8 @@ static int bench_time_GetMax(int timer);
 static int bench_time_GetMin(int timer);
 
 static prog_res_t bench_expand_var(bench_t *bench, const char *varname, char *sresult);
-static prog_res_t bench_expand_intvar(bench_t *bench, const char *varname, int *piresult, char *errbuf);
-static int bench_expand_intvar_quick(bench_t *bench, const char *varname);
+static prog_res_t bench_expand_intvar(bench_t *bench, const char *varname, intptr_t *piresult, char *errbuf);
+static intptr_t bench_expand_intvar_quick(bench_t *bench, const char *varname);
 
 static prog_cmd_res_t benchCmd_DPRINT(prog_process_t *process, const char *params, void *context);
 static prog_cmd_res_t benchCmd_Verbosity(prog_process_t *process, const char *params, void *context);
@@ -895,13 +898,6 @@ static char key2a_buf[256];
 static char key2a_buf2[256];
 static char key2a_buf3[256];
 
-/* Don't use this twice in one printf! */
-#define key2a(key, keylen) key2buf(key, keylen, key2a_buf)
-/* You can use this one for the second key in a printf */
-#define key2a2(key, keylen) key2buf(key, keylen, key2a_buf2)
-/* You can use this one for the third key in a printf */
-#define key2a3(key, keylen) key2buf(key, keylen, key2a_buf3)
-
 /*--------------------------------------------------------------------------
  convert a dp_playerId_t to ASCII
 --------------------------------------------------------------------------*/
@@ -1510,7 +1506,7 @@ prog_cmd_res_t benchCmd_Spawn(prog_process_t *process, const char *params, void 
 	char		buff[PROG_MAX_PARAM_LENGTH];
 	int 		argc;
 	char	 	*argv[PROG_MAX_PARAM];
-	int 		num;
+	intptr_t 		num;
 	prog_line_t *line;
 	prog_cmd_res_t res;
 	char		errbuf[256];
@@ -1579,10 +1575,10 @@ prog_cmd_res_t benchCmd_Spawn(prog_process_t *process, const char *params, void 
 /*--------------------------------------------------------------------------
  Return the value of the given integer expression, or 0 on error.
 --------------------------------------------------------------------------*/
-static int bench_expand_intvar_quick(bench_t *bench, const char *varname)
+static intptr_t bench_expand_intvar_quick(bench_t *bench, const char *varname)
 {
 	prog_res_t res;
-	int val;
+	intptr_t val;
 	char errbuf[256];
 	
 	res = bench_expand_intvar(bench, varname, &val, errbuf);
@@ -1624,7 +1620,7 @@ static int bench_expand_intvar_quick(bench_t *bench, const char *varname)
  On error, prog_RES_SYNTAX is returned if variable name can't be parsed,
  and error message is copied to errbuf.
 --------------------------------------------------------------------------*/
-static prog_res_t bench_expand_intvar(bench_t *bench, const char *varname, int *piresult, char *errbuf)
+static prog_res_t bench_expand_intvar(bench_t *bench, const char *varname, intptr_t *piresult, char *errbuf)
 {
 	dpid_t hid;
 	dp_result_t err;
@@ -1652,7 +1648,7 @@ static prog_res_t bench_expand_intvar(bench_t *bench, const char *varname, int *
 			break;
 
 		case 'd':
-			*piresult = (int) (bench->dp);
+			*piresult = (intptr_t) (bench->dp);
 			break;
 
 		case 'h':
@@ -1763,7 +1759,7 @@ static prog_res_t bench_expand_intvar(bench_t *bench, const char *varname, int *
 --------------------------------------------------------------------------*/
 static prog_res_t bench_expand_var(bench_t *bench, const char *varname, char *sresult)
 {
-	int iresult;
+	intptr_t iresult;
 	prog_cmd_res_t res;
 
 	*sresult = 0;
@@ -1883,7 +1879,7 @@ prog_cmd_res_t benchCmd_Eval(prog_process_t *process, const char *params, void *
 	char 		*infoName;
 	int         varNum;
 	prog_res_t res;
-	int			iresult;
+	intptr_t			iresult;
 	char		errbuf[256];
 
 	memcpy(buff, params, PROG_MAX_PARAM_LENGTH);
@@ -1940,7 +1936,7 @@ prog_cmd_res_t benchCmd_SetGlobal(prog_process_t *process, const char *params, v
 	char		buff[PROG_MAX_PARAM_LENGTH];
 	int 		argc;
 	char	 	*argv[PROG_MAX_PARAM];
-	int 		gnum;
+	intptr_t 		gnum;
 	prog_cmd_res_t res;
 	char		errbuf[256];
 	
@@ -2007,7 +2003,7 @@ prog_cmd_res_t benchCmd_ReadLineIntoGlobals(prog_process_t *process, const char 
 	char		buff[PROG_MAX_PARAM_LENGTH];
 	int 		argc;
 	char	 	*argv[PROG_MAX_PARAM];
-	int 		gnum;
+	intptr_t 		gnum;
 	prog_cmd_res_t res;
 	char		errbuf[256];
 	char		linebuf[256];
@@ -2100,7 +2096,7 @@ prog_cmd_res_t benchCmd_LosePeerWithRank(prog_process_t *process, const char *pa
 	char		errbuf[256];
 	int 		argc;
 	char	 	*argv[PROG_MAX_PARAM];
-	int			rank;
+	intptr_t			rank;
 	playerHdl_t h;
 	dpid_t		id;
 	prog_cmd_res_t res;
@@ -2235,8 +2231,8 @@ prog_cmd_res_t benchCmd_ReportScore(prog_process_t *process, const char *params,
 	char		buff[PROG_MAX_PARAM_LENGTH];
 	int 		argc;
 	char	 	*argv[PROG_MAX_PARAM];
-	int			id;
-	int			score;
+	intptr_t			id;
+	intptr_t			score;
 	char		scorebuf[3];
 	prog_cmd_res_t res;
 	char		errbuf[256];

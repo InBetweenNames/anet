@@ -83,9 +83,9 @@ static void sendServerPing(dp_t *dp,dp_serverInfo_t *server, char *adrbuf, dp_sp
 {
 	dp_result_t err;
 	struct {
-		dp_packetType_t tag PACK;
-		dp_ping_packet_t body PACK;
-	} pkt;
+		dp_packetType_t tag;
+		dp_ping_packet_t body;
+	} PACK pkt;
 	playerHdl_t h;
 	dp_species_t sessbuf;
 	
@@ -292,7 +292,8 @@ static myhostname_t *get_bootstrap_list()
 		line[127] = '\0';
 		while (NULL != fgets(line, 127, fp)) {
 			char thisip[128], thishost[128];
-			int lenip, lenhost;
+			size_t const lenip = 128;
+      size_t const lenhost = 128;
 
 			if (2 != sscanf(line, "%s %s", thisip, thishost))
 				continue;
@@ -319,8 +320,6 @@ static myhostname_t *get_bootstrap_list()
 					nalloc += 16;
 				}
 			}
-			lenip = strlen(thisip) + 1;
-			lenhost = strlen(thishost) + 1;
 			bootstrap[nhosts].ip = (char *)malloc(lenip + lenhost);
 			if (!bootstrap[nhosts].ip) {
 				DPRINT(("get_bootstrap_list: malloc host[%d] failed\n", nhosts));
@@ -738,9 +737,9 @@ dp_result_t dpHandleServerPingResponsePacket(
 	size_t serverlen;
 
 	struct dpHSPRP_pkt_s {
-		dp_packetType_t tag PACK;
-		dp_ping_packet_t body PACK;
-	} *pkt = (struct dpHSPRP_pkt_s *)buf;
+		dp_packetType_t tag;
+		dp_ping_packet_t body;
+	} PACK *pkt = (struct dpHSPRP_pkt_s *)buf;
 	clock_t tStart;
 	unsigned char adrbuf[dp_MAX_ADR_LEN];
 	dp_result_t err;

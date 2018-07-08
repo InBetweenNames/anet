@@ -111,15 +111,15 @@ void readSwap(const void **bp, void *dat, unsigned int size)
 }
 
 #else
-void writeSwap(void **bp, const void *dat, unsigned int size)
+void writeSwap(void **bp, const void *dat, size_t size)
 {
 	memcpy(*bp, dat, size);
-	(unsigned char *)*bp += size;
+	*((const unsigned char**)bp) += size;
 }
-void readSwap(const void **bp, void *dat, unsigned int size)
+void readSwap(const void **bp, void *dat, size_t size)
 {
 	memcpy(dat, *bp, size);
-	(unsigned char *)*bp += size;
+	*((const unsigned char**)bp) += size;
 }
 
 #endif

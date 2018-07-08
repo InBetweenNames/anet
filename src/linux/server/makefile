@@ -15,7 +15,7 @@ COPT = $(FLAGS) -DUNIX -Dcdecl="" "-D__NO_ANONYMOUS_UNIONS__" "-DPACK=$(PACK)" -
 
 default: ../../../../linux86/bin/$(DEST)
 
-OBJ_FILES = server.o servscor.o wmq.o wmqfile.o avgstat.o sbdserv.o bhttp.o /usr/lib/libbsd.a ../../../../linux86/lib/$(dp_LIB)
+OBJ_FILES = server.o servscor.o wmq.o wmqfile.o avgstat.o sbdserv.o bhttp.o ../../../../linux86/lib/$(dp_LIB)
 
 ../../../../linux86/bin/$(DEST): $(DEST)
 	if [ ! -d ../../../../linux86 ]; then mkdir ../../../../linux86; fi

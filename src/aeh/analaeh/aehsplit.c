@@ -40,12 +40,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 static void exitUsage(char *msg)
 {
-	printf("\
-Usage: aehsplit <-c crash_dir> <crashlog>\n\
-	Read crashes from <crashlog>, write out analyzed text files to
-	crash_dir in a format suitable for use by crshmail.pl.\n\
-	<-c crash_dir>   Index unique crashes by signature in crash_dir.\n\
-	%s\n", msg);
+	printf("Usage: aehsplit <-c crash_dir> <crashlog>\n"
+	"Read crashes from <crashlog>, write out analyzed text files to"
+	"crash_dir in a format suitable for use by crshmail.pl.\n"
+	"<-c crash_dir>   Index unique crashes by signature in crash_dir.\n"
+	"%s\n", msg);
 	exit(1);
 }
 
@@ -196,7 +195,6 @@ int main(int argc, char *argv[])
 		char signature[10];
 		char outdir[aeh_MAX_PATH];
 		char outbinfile[aeh_MAX_PATH];
-		time_t now;
 #if 0
 		int bNewCrash;
 		FILE *fp;
@@ -219,9 +217,8 @@ int main(int argc, char *argv[])
 		}
 		stackcrc = aeh_getSignature(&aeh);
 		aeh_signature_toString(stackcrc, signature);
-		now = time(NULL);
 		DPRINT(("Read crash at t:%d: sig:%s sessType:%d build:%d.%d ninst:%d\n",
-			now, signature, aeh.app.sessionType, aeh.app.major_version,
+			time(NULL), signature, aeh.app.sessionType, aeh.app.major_version,
 			aeh.app.minor_version, ninst));
 
 		/* look up the crash by signature, sessionType */

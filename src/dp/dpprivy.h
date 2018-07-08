@@ -54,8 +54,8 @@ int getTempDir(char *name, int namelen);
  Write/read size bytes to/from dat from/to *bp, incrementing *bp by size.
  Byteswaps if Sparc and PowerMac and do nothing otherwise.
 ------------------------------------------------------------------------*/
-void writeSwap(void **bp, const void *dat, unsigned int size);
-void readSwap(const void **bp, void *dat, unsigned int size);
+void writeSwap(void **bp, const void *dat, size_t size);
+void readSwap(const void **bp, void *dat, size_t size);
 
 #ifndef NO_NETWORK	/* what the hell is this? */
 /*-----------------------------------------------------------------------
@@ -161,7 +161,7 @@ void dp_assertValid(dp_t *d);
  Does not fill in address field; that has to be looked up in the hosts table.
  Returns number of bytes used, or -1 on error.
 ----------------------------------------------------------------------*/
-int dp_unpack_playerId(dpid_t id, const char *buf, dp_playerId_t *p);
+ptrdiff_t dp_unpack_playerId(dpid_t const id, const unsigned char *buf, dp_playerId_t *p);
 
 /*----------------------------------------------------------------------
  Convert a dpid into a playerHdl.

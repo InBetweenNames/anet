@@ -15,7 +15,7 @@ default: iotest
 #--------------------------------------------------------------
 # server is server.c linked statically to the real comm layer.
 
-iotest_OBJ_FILES =	iotest.o raw.o /usr/lib/libbsd.a ../../linux/lib/dp.a
+iotest_OBJ_FILES =	iotest.o raw.o ../../linux/lib/dp.a
 
 # Set target dependencies to generate necessary re-compiles.
 iotest : $(iotest_OBJ_FILES)

@@ -128,7 +128,7 @@ int main(int argc, char **argv)
 	int sessType = 0;
 	char logpath[aeh_MAX_PATH];
 	char catpath[aeh_MAX_PATH];
-	char outpath[aeh_MAX_PATH];
+	char outpath[aeh_MAX_PATH + aeh_MAX_PATH];
 	char reloutdir[aeh_MAX_PATH];
 
 	catpath[0] = '\0';
@@ -297,7 +297,7 @@ int main(int argc, char **argv)
 					printf("can't mkdirs_to %s\n", outdir);
 					continue;
 				}
-				sprintf(outpath, "%s%c%s", outdir, aeh_PATH_DELIMIT,
+				snprintf(outpath, aeh_MAX_PATH*2, "%s%c%s", outdir, aeh_PATH_DELIMIT,
 					aehlog.path + (ptr - outdir));
 			} else {
 				/* No options were given, so put it in the current directory. */

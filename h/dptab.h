@@ -801,10 +801,10 @@ DP_API dp_result_t dptab_handlePacket(dptab_t *dptab, playerHdl_t src, size_t le
 /* Delete a variable */
 #define dptab_DELETE_PACKET_ID		dppt_MAKE('d','*')
 typedef struct {
-	unsigned char keylen PACK;
-	unsigned char subkeylen PACK;
-	char key[1] PACK;			/* key, then subkey; dummy size. */
-} dptab_delete_packet_t;
+	unsigned char keylen;
+	unsigned char subkeylen;
+	char key[1];			/* key, then subkey; dummy size. */
+} PACK dptab_delete_packet_t;
 
 /* Get size of struct without key */
 #define sizeof_dptab_DELETE_PACKET_HDR (sizeof(dptab_initial_packet_t) - sizeof(char))
@@ -812,14 +812,14 @@ typedef struct {
 /* First (and maybe last) packet is sent with this header */
 #define dptab_INITIAL_PACKET_ID		dppt_MAKE('d','!')
 typedef struct {
-	size_t len PACK;			/* length of user data */
-	long crc PACK;				/* checksum */
-	unsigned char xferid PACK;
-	unsigned char keylen PACK;
-	unsigned char subkeylen PACK;
-	unsigned char hops PACK;	/* hops left before variable dies */
-	char key[1] PACK;			/* key, then subkey; dummy size. */
-} dptab_initial_packet_t;
+	size_t len;			/* length of user data */
+	long crc;				/* checksum */
+	unsigned char xferid;
+	unsigned char keylen;
+	unsigned char subkeylen;
+	unsigned char hops;	/* hops left before variable dies */
+	char key[1];			/* key, then subkey; dummy size. */
+} PACK dptab_initial_packet_t;
 
 /* Get size of struct without key */
 #define sizeof_dptab_INITIAL_PACKET_HDR (sizeof(dptab_initial_packet_t) - sizeof(char))
@@ -827,8 +827,8 @@ typedef struct {
 /* 2nd, 3rd, etc. packets are sent with this packet type and header. */
 #define dptab_BODY_PACKET_ID		dppt_MAKE('d','@')
 typedef struct {
-	unsigned char xferid PACK;	/* Refers back to key in first packet */
-} dptab_body_packet_t;
+	unsigned char xferid;	/* Refers back to key in first packet */
+} PACK dptab_body_packet_t;
 #define dptab_BODY_MAXLEN (dpio_MAXLEN_RELIABLE - sizeof(dptab_body_packet_t) - sizeof(dp_packetType_t))
 
 /* Bundles of small transfers are sent with this header */
@@ -873,19 +873,19 @@ typedef struct {
 /* Deleting a table entry */
 #define dptab_DELITEM_PACKET_ID		dppt_MAKE('d','$')
 typedef struct {
-	unsigned char keylen PACK;
-	unsigned char subkeylen PACK;
-	char key[1] PACK;			/* key, then subkey; dummy size. */
-} dptab_delitem_packet_t;
+	unsigned char keylen;
+	unsigned char subkeylen;
+	char key[1];			/* key, then subkey; dummy size. */
+} PACK dptab_delitem_packet_t;
 
 /* Requesting a table subscription
  * This should eventually contain a filter spec, too.
  */
 #define dptab_SUBSCRIBE_PACKET_ID		dppt_MAKE('d','^')
 typedef struct {
-	unsigned char keylen PACK;
-	char key[1] PACK;			/* key; dummy size. */
-} dptab_subscribe_packet_t;
+	unsigned char keylen;
+	char key[1];			/* key; dummy size. */
+} PACK dptab_subscribe_packet_t;
 
 /* Request to cancel a table subscription */
 #define dptab_UNSUBSCRIBE_PACKET_ID		dppt_MAKE('d','&')

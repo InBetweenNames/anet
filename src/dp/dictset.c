@@ -85,6 +85,7 @@ MSVC's warning level is set to 4.
 #pragma warning( disable : 4514 )
 #endif
 
+#include <string.h>
 
 /**
 * Types

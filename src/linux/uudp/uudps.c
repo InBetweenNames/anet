@@ -121,9 +121,9 @@ typedef struct sockaddr sockaddr;
 
 /* Holds an IP address and port */
 typedef struct addr_s {
-	u_long addr PACK;	/* in network order */
-	u_short port PACK;	/* in network order */
-} addr_t;
+	uint32_t addr;	/* in network order */
+	uint16_t port;	/* in network order */
+} PACK addr_t;
 
 /* Second address of a peer (can assume it's his private, internal adr) */
 typedef struct uudps_peer2_s {
@@ -912,8 +912,8 @@ commScanAddr(
 {
 	comm_t	*comm = (comm_t *) commPtr;
 	commScanAddrResp_t respDummy;
-	u_long adr;
-	u_short port = UUDP_SOCKET_DEFAULT;
+	uint32_t adr;
+	uint16_t port = UUDP_SOCKET_DEFAULT;
 	char *pc;
 
 	/* Protect against invalid arguments */

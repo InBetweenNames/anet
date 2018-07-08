@@ -17,6 +17,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 
-unsigned long dp_crc32_inc(unsigned char *buf, int len, unsigned long crc);
-unsigned long dp_crc32(unsigned char *buf, int len);
-unsigned long dp_fil_crc32(FILE *fp);
+#include <stdint.h>
+
+uint32_t dp_crc32_inc(unsigned char *buf, int len, uint32_t crc);
+uint32_t dp_crc32(unsigned char *buf, int len);
+uint32_t dp_fil_crc32(FILE *fp);

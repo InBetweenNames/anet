@@ -20,11 +20,11 @@ echo "gtest"
 ( cd ../../demo/gtest ; sh build $1 ) || die
 
 # Bench
-echo "bench..."
-( cd ../test/bench ; sh build $1 ) || die
-install -d ${BUILD}/bench
-install -m 0644 ../test/bench/*.pr ${BUILD}/bench
-install ${BUILD}/bin/bench* ${BUILD}/bench 
+#echo "bench..."
+#( cd ../test/bench ; sh build $1 ) || die
+#install -d ${BUILD}/bench
+#install -m 0644 ../test/bench/*.pr ${BUILD}/bench
+#install ${BUILD}/bin/bench* ${BUILD}/bench 
 
 # Load
 echo "load"
@@ -34,19 +34,19 @@ install -m 0644 ../test/load/*.ini ${BUILD}/load
 install ${BUILD}/bin/load* ${BUILD}/load
 
 # Crash monitor
-echo "Crash Monitor"
-( cd ../aeh/analaeh ; sh build $1 ) || die
-install -d ${BUILD}/crash
-install crash/* ${BUILD}/crash
-install ${BUILD}/bin/procserv* ${BUILD}/crash
-install ${BUILD}/bin/analcrsh* ${BUILD}/crash
-install ${BUILD}/bin/aehsplit* ${BUILD}/crash
-install ${BUILD}/bin/modcrc* ${BUILD}/crash
-install -d ${BUILD}/crash
-install -m 0644 crash/*.in crash/*.txt crash/*.java ${BUILD}/crash
-install -m 0644 crash/crontab.lst crash/crashenv ${BUILD}/crash
-install -m 0755 crash/*.pl crash/*.sh ${BUILD}/crash
-
+##echo "Crash Monitor"
+#( cd ../aeh/analaeh ; sh build $1 ) || die
+#install -d ${BUILD}/crash
+#install crash/* ${BUILD}/crash
+#install ${BUILD}/bin/procserv* ${BUILD}/crash
+#install ${BUILD}/bin/analcrsh* ${BUILD}/crash
+#install ${BUILD}/bin/aehsplit* ${BUILD}/crash
+#install ${BUILD}/bin/modcrc* ${BUILD}/crash
+#install -d ${BUILD}/crash
+#install -m 0644 crash/*.in crash/*.txt crash/*.java ${BUILD}/crash
+#install -m 0644 crash/crontab.lst crash/crashenv ${BUILD}/crash
+#install -m 0755 crash/*.pl crash/*.sh ${BUILD}/crash
+#
 # Server
 echo "server"
 ( cd server ; sh build $1 ) || die
@@ -167,8 +167,8 @@ install -m 0755 ${BUILD}/bin/load ${BUILD}/anetmon/load
 	cd ${BUILD}/..
 	if [ -f linux86.tgz ]; then rm linux86.tgz; fi
 	tar -cf - linux86 | gzip > linux86.tgz
-	if [ -f linux86.zip ]; then rm linux86.zip; fi
-	zip -0 linux86.zip linux86.tgz anet3srv.tgz
+	#if [ -f linux86.zip ]; then rm linux86.zip; fi
+	#zip -0 linux86.zip linux86.tgz anet3srv.tgz
 ) || die
 
 echo "Building Complete..." 

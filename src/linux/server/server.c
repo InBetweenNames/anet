@@ -120,6 +120,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include "dpprivy.h"
 
+#include "mywcs.h"
+
 #ifdef UNIX
 #define HTMLEXT ".html"
 #else
@@ -1378,7 +1380,7 @@ static int updateRoom(
 		return 1;
 	}
 	for (i = 0; i < dptab_tableSize(mysessions); i++) {
-		int sesslen;
+		size_t sesslen;
 		char *sessbuf;
 		dptab_get_byindex(mysessions, i, (void**)&sessbuf, &sesslen, subkey, &subkeylen);
 		dp_unpack_session(dp, subkey, subkeylen, sessbuf, sesslen, &sess[i]);
@@ -1486,7 +1488,7 @@ static int updateServerTable(dp_t *dp, const char *fname)
 
 	/*For server table entry, delete those that no longer exist*/
 	for (i = dptab_tableSize(servers) - 1; i >= 0; i--) {
-		int hlen, j;
+		size_t hlen, j;
 		char *hbuf;
 		if (dptab_get_byindex(servers, i, (void**)&hbuf, &hlen, subkey, &subkeylen) != dp_RES_OK)
 			continue;
@@ -1568,7 +1570,7 @@ static int updateAppTable(
 		unsigned short type;
 		unsigned short plat;
 		unsigned char lang;
-		int vlen, j;
+		size_t vlen, j;
 		dp_version_t *vbuf;
 		if (dptab_get_byindex(apps, i, (void**)&vbuf, &vlen, subkey, &subkeylen) != dp_RES_OK)
 			continue;
@@ -1939,7 +1941,7 @@ int main( int argc, char *argv[] )
 		memset(&req, 0, sizeof(commSetParamReq_t));
 		req.reqLen = sizeof(commSetParamReq_t);
 		req.param_num = comm_PARAM_SESSIONINFO;
-		req.param_value = (int)&sessinfo;
+		req.param_value = (intptr_t)&sessinfo;
 		if (commSetParam(&req, &resp, dp->dpio->commPtr) != 1) {
 			printf("Couldn't commSetParam on sessinfo, status %d\n", resp.status);
 			exit(1);
