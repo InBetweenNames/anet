@@ -11,6 +11,9 @@ die() {
 
 BUILD=../../linux86
 
+#force 32-bit until proven innocent
+CFLAGS="$CFLAGS -m32"
+
 # Library
 echo "Library"
 ( cd dp ; sh build $1 ) || die
