@@ -13,6 +13,7 @@ BUILD=../../linux86
 
 #force 32-bit until proven innocent
 CFLAGS="$CFLAGS -m32"
+export CFLAGS
 
 # Library
 echo "Library"
