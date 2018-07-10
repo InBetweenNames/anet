@@ -1013,8 +1013,10 @@ prog_cmd_res_t benchCmd_dpReceive(prog_process_t *process, const char *params, v
 		/* There was data */
     	{
 #include "dppack1.h"
+
+    //TODO: SMP - union not packed?
 		struct {
-			dp_packetType_t type PACK;
+			dp_packetType_t type;
 			union {
 				dp_user_addPlayer_packet_t addPlayer;
 				dp_user_delPlayer_packet_t delPlayer;
@@ -1027,8 +1029,8 @@ prog_cmd_res_t benchCmd_dpReceive(prog_process_t *process, const char *params, v
 				dp_account_packet_t acctpkt;
 				dp_sessionResult_packet_t sessRes;
 				unsigned char buf[512];
-			} u PACK;
-		} *pkt = (void *)buf;
+			} u;
+		} PACK *pkt = (void *)buf;
 #include "dpunpack.h"
 
 			switch (pkt->type)

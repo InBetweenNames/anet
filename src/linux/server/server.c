@@ -2008,15 +2008,15 @@ int main( int argc, char *argv[] )
 
 #include "dppack1.h"
 		struct {
-			dp_packetType_t type PACK;
+			dp_packetType_t type;
 			union {
 				dp_user_addPlayer_packet_t addPlayer;
 				dp_user_delPlayer_packet_t delPlayer;
 				dp_account_packet_t account;
 				dp_sessionResult_packet_t sessionRes;
 				char buf[1024];
-			} u PACK;
-		} pkt;
+			} PACK u;
+		} PACK pkt;
 #include "dpunpack.h"
 
 		size_t size;

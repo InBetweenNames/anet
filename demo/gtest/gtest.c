@@ -3663,8 +3663,9 @@ int gtest( int argc, char *argv[] )
 		dpid_t idTo;
 		char nameBuf[256];
 #include "dppack1.h"
+    //TODO: SMP - union not packed?
 		struct {
-			dp_packetType_t type PACK;
+			dp_packetType_t type;
 			union {
 				dp_user_addPlayer_packet_t addPlayer;
 				dp_user_delPlayer_packet_t delPlayer;
@@ -3677,8 +3678,8 @@ int gtest( int argc, char *argv[] )
 				dp_account_packet_t acctpkt;
 				dp_sessionResult_packet_t sessRes;
 				unsigned char buf[512];
-			} u PACK;
-		} pkt;
+			} u;
+		} PACK pkt;
 #include "dpunpack.h"
 		size_t size;
 		int ch = 0;

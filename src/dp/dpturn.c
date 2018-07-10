@@ -327,14 +327,15 @@ dp_result_t dpturn_handlePacket(dp_t *dp, dpid_t idFrom, char *buf, size_t bufle
 	int loop;
 	dpturn_peer_t *p;
 #include "dppack1.h"
+  //TODO: SMP -- no PACK on union?
 	struct dp_turn_handlePacket_pkt_s {
-		dp_packetType_t type PACK;
+		dp_packetType_t type;
 		union {
 			/*dp_user_addPlayer_packet_t addPlayer;*/
 			/*dp_user_delPlayer_packet_t delPlayer;*/
 			unsigned char buf[dpio_MAXLEN_UNRELIABLE];
-		} u PACK;
-	} *pkt = (struct dp_turn_handlePacket_pkt_s *)buf;
+		} u;
+	} PACK *pkt = (struct dp_turn_handlePacket_pkt_s *)buf;
 #include "dpunpack.h"
 	buflen -= sizeof(dp_packetType_t);
 

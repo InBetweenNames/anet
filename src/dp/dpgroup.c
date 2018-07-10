@@ -266,11 +266,11 @@ static dp_result_t dpGroup_SendAddGroupPacket(
 	struct {
 		dp_packetType_t tag;
 		union {
-			dp_group_t add PACK;
-			dp_user_delGroup_packet_t del PACK;
-		} b PACK;
-		char pad[6] PACK;
-	} pkt;
+			dp_group_t add;
+			dp_user_delGroup_packet_t del;
+		} PACK b;
+		char pad[6];
+	} PACK pkt;
 #include "dpunpack.h"
 
 	if (!dp || !dp->groups || !pg) {
@@ -343,9 +343,9 @@ static dp_result_t dpGroup_SendAddPlayerPacket(
 #include "dppack1.h"
 	struct {
 		dp_packetType_t tag;
-		dp_addPlayerToGroup_packet_t body PACK;
-		char pad[6] PACK;
-	} pkt;
+		dp_addPlayerToGroup_packet_t body;
+		char pad[6];
+	} PACK pkt;
 #include "dpunpack.h"
 
 	if (!dp) {

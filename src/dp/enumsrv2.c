@@ -64,10 +64,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /* Hidden definition of the reserved field in dp_serverInfo_t */
 #include "dppack1.h"
 typedef struct {
-	long reserved PACK;
-	short i_rtt PACK;					/* next entry in rtt_ms to overwrite */
-	short rtt_ms[dp_SERVER_NPINGS] PACK;/* roundtrip time, msec; -1 if empty */
-} dp_serverInfo_reserved_t;
+	long reserved;
+	short i_rtt;					/* next entry in rtt_ms to overwrite */
+	short rtt_ms[dp_SERVER_NPINGS];/* roundtrip time, msec; -1 if empty */
+} PACK dp_serverInfo_reserved_t;
 #include "dppackn.h"
 
 #define RES(p) ((dp_serverInfo_reserved_t *)((p)->reserved))

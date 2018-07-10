@@ -713,9 +713,9 @@ processMessage(dp_t* myDP, pspResult_t* res)
 				int i;
 				char printbuf[BUFSIZE];
 				struct {
-					dp_packetType_t tag PACK;
-					dp_user_addPlayer_packet_t pdat PACK;
-				} *pkt = pbuf;
+					dp_packetType_t tag;
+					dp_user_addPlayer_packet_t pdat;
+				} PACK *pkt = pbuf;
 				if (res->n_expectedpVars != 0) {
 					for (i = 0; i < res->n_expectedPlayers; i++) {
 						if (res->pvplayerID[i] == pkt->pdat.id) {
@@ -740,9 +740,9 @@ processMessage(dp_t* myDP, pspResult_t* res)
 				char printbuf[BUFSIZE];
 				long base;
 				struct {
-					dp_packetType_t tag PACK;
-					dp_user_playerData_packet_t pdat PACK;
-				} *pkt = pbuf;
+					dp_packetType_t tag;
+					dp_user_playerData_packet_t pdat;
+				} PACK *pkt = pbuf;
 				// find player record for player variable
 				for (i = 0; i < res->n_expectedPlayers; i++)
 					if (res->pvplayerID[i] == pkt->pdat.id) break;

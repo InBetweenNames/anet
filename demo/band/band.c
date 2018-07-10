@@ -46,25 +46,26 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 /* Packets which simulate game information */
 #define BAND_PACKET_ID dppt_MAKE('B','_')
 typedef struct {
-	unsigned long pkt_round PACK;  /* incremented when test params change */
-	unsigned long pkt_num PACK;    /* incremented with each band packet sent */
-} band_packet_t;
+	unsigned long pkt_round;  /* incremented when test params change */
+	unsigned long pkt_num;    /* incremented with each band packet sent */
+} PACK band_packet_t;
 
 /* Sent as a reply to a band packet to allow measurement of latency */
 #define LATENCY_PACKET_ID dppt_MAKE('B','R')
 typedef struct {
-	unsigned long pkt_num PACK;    /* this is a reply to packet# pkt_num */
-	clock_t max_ping PACK;         /* the maximum ping I see locally */
-} latency_packet_t;
+	unsigned long pkt_num;    /* this is a reply to packet# pkt_num */
+	clock_t max_ping;         /* the maximum ping I see locally */
+} PACK latency_packet_t;
 
 /* Sent by host to notify clients of new test parameters */
 #define TESTPARAMS_PACKET_ID dppt_MAKE('B','T')
 typedef struct {
-	long pkt_interval PACK;   /* the new interval between packet sends (ms) */
-	long pkt_size PACK;       /* the new packet size to send (Bytes) */
-} testParams_packet_t;
+	long pkt_interval;   /* the new interval between packet sends (ms) */
+	long pkt_size;       /* the new packet size to send (Bytes) */
+} PACK testParams_packet_t;
 
 /* Sent by host to notify clients of the <dll>.ini settings at login time */
+//TODO: SMP -- these are ints -- assumed 32 bit? also not packed...
 #define DLLINI_PACKET_ID dppt_MAKE('B','D')
 typedef struct {
 	int LimitLowNPPI;
@@ -72,8 +73,9 @@ typedef struct {
 	int DivisorPing2NPPI;
 } dllIni_packet_t;
 
+//TODO: SMP -- union not packed
 typedef struct {
-	dp_packetType_t type PACK;
+	dp_packetType_t type;
 	union {
 		dp_user_addPlayer_packet_t addPlayer;
 		dp_user_delPlayer_packet_t delPlayer;
@@ -83,8 +85,8 @@ typedef struct {
 		testParams_packet_t testParams;
 		dllIni_packet_t dllIni;
 		unsigned char buf[dpio_MAXLEN_UNRELIABLE];
-	} u PACK;
-} pkt_t;
+	} u;
+} PACK pkt_t;
 
 #include "dpunpack.h"
 

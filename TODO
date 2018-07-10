@@ -1,0 +1,5 @@
+* unsigned char vs signed char vs char: which is most legal for aliasing values?
+* use ms_struct pragma for compatibility with MSVC?
+  + Note: packed structs should be identical in both compilers as long as the
+    ABIs agree (i.e. primitive types are same size)
+* use #pragma pack instead? it would be identical to msvc at least

@@ -290,6 +290,7 @@ MSVC's warning level is set to 4.
 /*--------------------------------------------------------------------------
  Element of dp->election_votes.
 --------------------------------------------------------------------------*/
+//TODO: SMP - PACK not used here?
 typedef struct {
 	clock_t when;		/* Used to time out old votes. */
 	dpid_t id;			/* Who this vote is for. */
@@ -9363,8 +9364,10 @@ static dp_result_t dp_receive(
 	playerHdl_t		pktsrc;
 	size_t			pktlen;
 	int				get_flags;
+
+  //TODO: SMP -- verify the union has no padding internally.
 	struct dpReceivePkt_s {
-		dp_packetType_t tag PACK;
+		dp_packetType_t tag;
 		union {
 			dp_session_packet_t body1;
 			dp_join_packet_t join;
@@ -9380,8 +9383,8 @@ static dp_result_t dp_receive(
 			dp_indirect_join_packet_t indirectJoin;
 			tserv_packet_t tservpkt;
 			dp_account_packet_t	account;
-		} body PACK;
-	} *pkt = (struct dpReceivePkt_s *)buffer;
+		} body;
+	} PACK *pkt = (struct dpReceivePkt_s *)buffer;
 
 
 	/* If our host record was deleted, or if the master's handle

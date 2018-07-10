@@ -274,13 +274,15 @@ int chat(int sysargc, char **sysargv)
 	while(1) {			/* input and receive loop */
 		dpid_t idFrom;
 		dpid_t idTo;
+
+    //TODO: SMP - union not packed
 		struct {
-			dp_packetType_t type PACK;
+			dp_packetType_t type;
 			union {
 				dp_objectDelta_packet_t	delta;
 				unsigned char buf[dpio_MAXLEN_UNRELIABLE];
-			} u PACK;
-		} pkt;
+			} u;
+		} PACK pkt;
 		size_t pktsize;
 
 		if (quitState == 1) {

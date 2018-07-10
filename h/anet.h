@@ -430,18 +430,18 @@ typedef struct {
 #define comm_INIT_DIALING_METHOD_TONE  1
 
 typedef struct {			/* Request (filled in by caller) */
-	size_t reqLen PACK;			/* Sizeof(commInitReq_t) */
-	long sessionId PACK;		/* Random number chosen at initial startup */
-	long portnum PACK;
-	long baud PACK;
-	long baseadr PACK;          /* ignored by Windows */
-	long hwirq PACK;            /* ignored by Windows */
-	long swint PACK;            /* ignored by Windows */
-	char *phonenum PACK;
-	char *modeministr PACK;
-	long flags PACK;			/* controls whether to dial and/or test */
-	long dialing_method PACK;	/* parameter to HMSetDialingMethod */
-} commInitReq_t;
+	size_t reqLen;			/* Sizeof(commInitReq_t) */
+	long sessionId;		/* Random number chosen at initial startup */
+	long portnum;
+	long baud;
+	long baseadr;          /* ignored by Windows */
+	long hwirq;            /* ignored by Windows */
+	long swint;            /* ignored by Windows */
+	char *phonenum;
+	char *modeministr;
+	long flags;			/* controls whether to dial and/or test */
+	long dialing_method;	/* parameter to HMSetDialingMethod */
+} PACK commInitReq_t;
 
 typedef struct {
 	int portnum;			/* Value for commInitReq->portnum (e.g. 0) */
@@ -492,20 +492,20 @@ typedef struct dp_serverInfo_s {
  * Strings of wchar_t are Unicode.  These strings are always nul-terminated.
  */
 typedef struct {
-	dp_uid_t uid PACK;
-	wchar_t uname[dp_USER_NAME_LEN] PACK;
-	wchar_t url[dp_USER_URL_LEN] PACK;
-	wchar_t description[dp_USER_DESCRIPTION_LEN] PACK;
-} dp_userInfo_t;
+	dp_uid_t uid;
+	wchar_t uname[dp_USER_NAME_LEN];
+	wchar_t url[dp_USER_URL_LEN];
+	wchar_t description[dp_USER_DESCRIPTION_LEN];
+} PACK dp_userInfo_t;
 
 /* A record describing a user's cumulative scores in one kind of game.  
  * Can't be completely declared in C; some manual unpacking required.
  */
 typedef struct {
-	short nScoreTypes PACK;
-	short scoreIds[1 /* nScoreTypes */] PACK;	/* variable length */
-	long scores[1 /* nScoreTypes */ ] PACK;		/* variable length */
-} dp_scoreInfo_t;
+	short nScoreTypes;
+	short scoreIds[1 /* nScoreTypes */];	/* variable length */
+	long scores[1 /* nScoreTypes */ ];		/* variable length */
+} PACK dp_scoreInfo_t;
 
 /* The kinds of objects that can be monitored with dpRequestObjectDeltas(). */
 typedef union {

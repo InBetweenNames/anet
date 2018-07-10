@@ -197,14 +197,16 @@ int main(int argc, char **argv)
 	while(1) {			/* input and receive loop */
 		dpid_t idFrom;
 		dpid_t idTo;
+
+    //TODO: SMP -- union not packed?
 		struct {
-			dp_packetType_t type PACK;
+			dp_packetType_t type;
 			union {
 				dp_user_addPlayer_packet_t addPlayer;
 				dp_user_delPlayer_packet_t delPlayer;
 				unsigned char buf[dpio_MAXLEN_UNRELIABLE];
-			} u PACK;
-		} pkt;
+			} u;
+		} PACK pkt;
 		size_t pktsize;
 		clock_t twait;
 
