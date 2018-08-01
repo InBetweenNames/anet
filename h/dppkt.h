@@ -479,7 +479,7 @@ typedef struct{
 #define dp_LOGIN_PACKET_ID		dppt_MAKE('e','1')
 typedef struct {
 	dp_species_t sessionType;
-} dp_login_packet_t;
+} PACK dp_login_packet_t;
 #endif
 
 /* Undo the previous pragma. */

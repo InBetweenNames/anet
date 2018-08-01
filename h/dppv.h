@@ -148,12 +148,11 @@ typedef struct {
 	 * new_dests lists the hosts that have been added since last cycle.
 	 * A playerHdl_t[] is used because that's just what dpio_put wants.
  	 */
-  //TODO: SMP - why are these PACKed and the above aren't?
 	playerHdl_t cur_dests[dp_MAXPLAYERS] PACK;
 	int cur_ndests PACK;
 	playerHdl_t new_dests[dp_MAXPLAYERS] PACK;
 	int new_ndests PACK;
-} pv_t;
+} PACK pv_t;
 
 /*--------------------------------------------------------------------------
  Create a pv_t.
@@ -213,7 +212,7 @@ typedef struct {
 	dpid_t id PACK;
 	unsigned short key PACK;
 	void *data PACK;			/* only sent on local machine, ptrs ok */
-} pv_user_playerData_packet_t;
+} PACK pv_user_playerData_packet_t;
 #endif
 
 /* First (and maybe last) packet is sent with this header */

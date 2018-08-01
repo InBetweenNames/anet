@@ -1,7 +1,7 @@
 # Makefile for dp library
 # Linux Version
 
-PACK=__attribute__ ((packed))
+PACK=__attribute__ ((packed)) __attribute__((ms_struct))
 COPT = $(FLAGS) -DUNIX -Dcdecl="" "-D__NO_ANONYMOUS_UNIONS__" "-DPACK=$(PACK)" -Dstrnicmp=strncasecmp -Dstricmp=strcasecmp -Ddp_ANET2 -DCOMM_INST -I. -I../../../../h -I../../../aeh -I../../../../demo/utils
 CC = gcc $(COPT)
 DRIVER=uudps.o dictset.o logpkt.o

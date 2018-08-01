@@ -10,7 +10,7 @@
 # Revision 1.1  1997/08/25 18:03:19  anitalee
 # Initial revision
 
-PACK=__attribute__ ((packed))
+PACK=__attribute__((packed)) __attribute__((ms_struct))
 COPT = $(FLAGS) -DUNIX -Dcdecl="" "-D__NO_ANONYMOUS_UNIONS__" "-DPACK=$(PACK)" -Dstrnicmp=strncasecmp -Dstricmp=strcasecmp -Ddp_ANET2 -I. -I../../../../h -I../../../../demo/utils -I../../../aeh -I../../../dp -I../../../score -I../../../sbd -I../../../bhttp
 
 default: ../../../../linux86/bin/$(DEST)

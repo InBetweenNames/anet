@@ -51,9 +51,7 @@ typedef struct {
 } PACK hkeytab_item_t;
 #define sizeof_hkeytab_item_t(n) (sizeof(char) + hkeytab_MAXLEN + (n))
 
-typedef 
-	dynatab_t
-hkeytab_t;
+typedef dynatab_t hkeytab_t;
 
 /*-----------------------------------------------------------------------
  Create a table whose elements all have the given size.

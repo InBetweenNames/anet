@@ -295,7 +295,7 @@ typedef struct {
 	unsigned char language;		/* e.g, English, French, Hindi, etc. */
 	dp_version_t current;		/* installed version # */
 	dp_version_t latest;		/* latest published version # */
-} dp_appParam_t;
+} PACK dp_appParam_t;
 
 /* copied from aeh.h; to be used by exception handling code to detect if
    exception was thrown by dpReportAssertionFailure() */
@@ -463,7 +463,7 @@ typedef struct {
 #else
 	char fname[128];
 #endif
-} dp_transport_t;
+} PACK dp_transport_t;
 
 #ifdef dp_ANET2
 /* Structure to hold info about a server.  To be used by a future
@@ -482,7 +482,7 @@ typedef struct dp_serverInfo_s {
 	short cur_games;				/* games currently running */
 	short cur_sessTypeGames;		/* games of sessType currently running */
 	char reserved[16];				/* for internal use */
-} dp_serverInfo_t;
+} PACK dp_serverInfo_t;
 
 #define dp_USER_NAME_LEN 16
 #define dp_USER_DESCRIPTION_LEN 256
@@ -514,7 +514,7 @@ typedef union {
 	dp_serverInfo_t serv;
 	dp_userInfo_t	user;
 	dp_scoreInfo_t  score;
-} dp_object_t;
+} PACK dp_object_t;
 
 #define dp_KEY_SESSIONS			1	/* known sessions */
 #define dp_KEY_PLAYERS			3
@@ -579,7 +579,7 @@ typedef struct {
 	dp_uid_t		uid;		/* dp_UID_NONE unless reason is dp_RES_OK */
 	dp_result_t 	reason;	
 	unsigned long	reserved;	/* for future use */
-} dp_account_packet_t;
+} PACK dp_account_packet_t;
 #endif
 
 /*************************************************************************/
@@ -659,7 +659,7 @@ typedef struct {
     long dwMaxPlayers;
     long dwMaxQueueSize;
     long dwPktLoss;
-} dp_caps_t;
+} PACK dp_caps_t;
 
 #ifdef dp_ANET2
 #define dp_STATS
@@ -691,7 +691,7 @@ typedef struct {
 		 waiting,
 		 sum_waiting,
 		 num_waiting;
-} dp_stat_t;
+} PACK dp_stat_t;
 /* How to tell dpGetStats() which statistics to access. */
 #define dp_STAT_DPIO_RX_REL_BYTES   0
 #define dp_STAT_DPIO_RX_REL_PKTS    1
@@ -716,9 +716,9 @@ typedef struct {
 #ifdef _WIN32
 	HANDLE hProcess;
 #else
-	char dummy;
+	uint32_t dummy; //SMP: same size as HANDLE (void*) on 32-bit windows.
 #endif
-} dpLaunchApp_result_t;
+} PACK dpLaunchApp_result_t;
 
 /* Undo the previous pragma. */
 /*include "dpunpack.h"*/

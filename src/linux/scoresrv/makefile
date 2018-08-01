@@ -1,6 +1,6 @@
 # Makefile for ActiveNet score server under Linux on intel using dp2
 
-PACK=__attribute__ ((packed))
+PACK=__attribute__((packed)) __attribute__((ms_struct))
 COPT = $(FLAGS) -DUNIX -Dcdecl="" "-D__NO_ANONYMOUS_UNIONS__" "-DPACK=$(PACK)" -Dstrnicmp=strncasecmp -Dstricmp=strcasecmp -Ddp_ANET2 -I. -I../../../../h -I../../../dp -I../../../score -I../../../antp -I$(JDKPATH)/include -I$(JDKPATH)/include/genunix
 
 LIBJSCORE2_OBJ_FILES = jscore2.o wmq.o wmqfile.o sq.o scorerep.o assoctab.o dynatab.o

@@ -206,7 +206,7 @@ typedef struct {
 	/* Put next packet in outstanding[next_pktnum % dpio_WINDOWSIZE] */
 	/* Warning: dpio_WINDOWSIZE must be power of 2. */
 	/* 0 <= (next_pktnum-windowBase) <= dpio_WINDOWSIZE */
-} dpio_window_t;
+} PACK dpio_window_t;
 
 /* Connection states.  See figure 18.12, "TCP/IP Illustrated, Volume 1",
  * but note that dpio doesn't piggyback acks on top of data packets (pity).
@@ -280,7 +280,7 @@ typedef struct {
 				/* indexed by ping_current_pktnum % * dpio_PING_TIME_SENT_N */
 	clock_t ping_time_sent[dpio_PING_TIME_SENT_N];	
 	short	ping_bits;		/* Bit i set if i'th newest ping is still outstanding */
-} dpio_conn_t;
+} PACK dpio_conn_t;
 
 /*------- The dpio_t itself. ----------------------------------------------- */
 typedef struct dpio_s {
@@ -358,7 +358,7 @@ typedef struct dpio_s {
 	 * See design comment for dpio_setPingIntervals(). */ 
 	clock_t ping_piggyback_interval;	/* in ECLOCKS */
 	clock_t ping_forced_interval;		/* in ECLOCKS */
-} dpio_t;
+} PACK dpio_t;
 
 /* Obscure our entry point names */
 #define dpio_scanAdr _dpbs

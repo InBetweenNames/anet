@@ -845,7 +845,7 @@ typedef struct {
 		char subkey[keylen] PACK;		/* item's subkey in table. */
 		char data[len] PACK;			/* actual data of transfer */
 	}
-} dptab_small_packet_t;
+} PACK dptab_small_packet_t;
 #endif
 
 /* Bytes of overhead in a dptab_small_packet.
@@ -867,7 +867,7 @@ typedef struct {
 
 	/* Enough info to identify the transmission in question. */
 	unsigned char xferid PACK;
-} dptab_reply_packet_t;
+} PACK dptab_reply_packet_t;
 #endif
 
 /* Deleting a table entry */

@@ -1,4 +1,4 @@
-PACK=__attribute__ ((packed))
+PACK=__attribute__((packed)) __attribute__((ms_struct))
 
 default: ../../../linux86/bin/runsrvfil.cgi
 
