@@ -12,7 +12,9 @@ die() {
 BUILD=../../linux86
 
 #force 32-bit until proven innocent
-CFLAGS="$CFLAGS -m32"
+#also force -fno-strict-aliasing since there are a TON of strict aliasing violations in the code!
+#use -O2 instead of -O3 until confirmed that -O3 works
+CFLAGS="$CFLAGS -m32 -fno-strict-aliasing -O2"
 export CFLAGS
 
 # Library

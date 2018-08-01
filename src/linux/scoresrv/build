@@ -6,10 +6,10 @@ die() {
 	exit 1
 }
 
-FLAGS_NORMAL="$CFLAGS -DNDEBUG -O3 -Werror"                                                                                                                               
+FLAGS_NORMAL="$CFLAGS -DNDEBUG -Werror"                                                                                                                               
 FLAGS_DEBUG="$CFLAGS -D_DEBUG -g -Werror"                                                                                                                                 
-FLAGS_PROFILE="$CFLAGS -DNDEBUG -D_PROFILE -O3 -pg -Werror"                                                                                                               
-FLAGS_LOG="$CFLAGS -DNDEBUG -DDPRNT -O3 -Werror"  
+FLAGS_PROFILE="$CFLAGS -DNDEBUG -D_PROFILE -pg -Werror"                                                                                                               
+FLAGS_LOG="$CFLAGS -DNDEBUG -DDPRNT -Werror"  
 
 JDKPATH=/usr/local/jdk
 LOPT_DEBUG="-L${JDKPATH}/lib/i586/green_threads -ljava_g"

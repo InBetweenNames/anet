@@ -6,11 +6,11 @@ rm -rf antpclnt
 # Debugging + logging
 FLAGS='-DDEBUG -g -D_DEBUG'
 # Logging
-#FLAGS='-DDPRNT -O3'
+#FLAGS='-DDPRNT'
 # Profiling
-#FLAGS='-DNDEBUG -O3 -pg'
+#FLAGS='-DNDEBUG -pg'
 # Normal
-#FLAGS='-DNDEBUG -O3'
+#FLAGS='-DNDEBUG'
 
 COPT="${FLAGS} -DUNIX -Dcdecl= -D__NO_ANONYMOUS_UNIONS__ -Dstrnicmp=strncasecmp -Dstricmp=strcasecmp -Ddp_ANET2 -I.. -I../../score -I../../../h"
 
