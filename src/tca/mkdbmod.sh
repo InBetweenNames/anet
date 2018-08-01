@@ -16,5 +16,5 @@ COPT="${FLAGS} -DUNIX -Dcdecl= -D__NO_ANONYMOUS_UNIONS__ -Dstrnicmp=strncasecmp 
 
 mkdir dbmod
 cd dbmod
-gcc ${COPT} "-DPACK=__attribute__ ((packed))" -DSIMNET -I../../../h -I../../dp -I../../../demo/utils  ../dbmod.c ../tcapw.c ../crypttab.c ../../../demo/utils/mywcs.c ../../3rdparty/d3des/d3des.c ../../3rdparty/md5/md5c.c ../../../demo/utils/eclock.c ../../dp/assoctab.c ../../dp/dynatab.c -o dbmod
+gcc ${COPT} "-DPACK=__attribute__((packed)) __attribute__((ms_struct))" -DSIMNET -I../../../h -I../../dp -I../../../demo/utils  ../dbmod.c ../tcapw.c ../crypttab.c ../../../demo/utils/mywcs.c ../../3rdparty/d3des/d3des.c ../../3rdparty/md5/md5c.c ../../../demo/utils/eclock.c ../../dp/assoctab.c ../../dp/dynatab.c -o dbmod
 

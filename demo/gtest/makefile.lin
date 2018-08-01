@@ -6,7 +6,7 @@
 # Revision 1.1  1997/08/25 18:04:12  anitalee
 # Initial revision
 
-PACK=__attribute__ ((packed))
+PACK=__attribute__((packed)) __attribute__((ms_struct))
 OPT = -DUNIX -Dcdecl="" "-D__NO_ANONYMOUS_UNIONS__" "-DPACK=$(PACK)" -Dstrnicmp=strncasecmp -Dstricmp=strcasecmp -Ddp_ANET2 -I. -I../../../h -I../../utils
 COPT = $(FLAGS) $(OPT)
 OBJ_FILES = gtest.o raw.o avgstat.o ../../../linux86/lib/$(dp_LIB)

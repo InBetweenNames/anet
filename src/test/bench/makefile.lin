@@ -1,6 +1,6 @@
 # Makefile for bench, a script based testing utility
 
-PACK=__attribute__ ((packed))
+PACK=__attribute__((packed)) __attribute__((ms_struct))
 OPT = -DUNIX -Dcdecl="" "-D__NO_ANONYMOUS_UNIONS__" "-DPACK=$(PACK)" -Dstrnicmp=strncasecmp -Dstricmp=strcasecmp -Ddp_ANET2 -I. -I../../../../h -I../../../../src/dp -I../../../../demo/utils -I..
 COPT = $(FLAGS) $(OPT)
 OBJ_FILES = bench.o prog.o raw.o ../../../../linux86/lib/$(dp_LIB)

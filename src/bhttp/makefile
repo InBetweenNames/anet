@@ -1,5 +1,5 @@
 FLAGS = -g -D_DEBUG
-PACK=__attribute__ ((packed))
+PACK=__attribute__((packed)) __attribute__((ms_struct))
 COPT = $(FLAGS) -DUNIX -Dcdecl="" "-D__NO_ANONYMOUS_UNIONS__" "-DPACK=$(PACK)" -Dstrnicmp=strncasecmp -Dstricmp=strcasecmp -I. -I../../h -I../../demo/utils
 
 SBDTESTS_OBJ = bhttpt.o bhttp.o assoctab.o dynatab.o eclock.o

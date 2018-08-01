@@ -3,7 +3,7 @@
 # Revision 1.2  1997/03/07 02:23:35  geychaner
 # Now includes the raw directory properly
 
-PACK=__attribute__ ((packed))
+PACK=__attribute__((packed)) __attribute__((ms_struct))
 
 COPT = -DUNIX -Dcdecl="" "-D__NO_ANONYMOUS_UNIONS__" "-DPACK=$(PACK)" -Dstricmp=strcasecmp -I. -I../../h -I../utils -g
 .c.o:

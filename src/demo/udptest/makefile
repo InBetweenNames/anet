@@ -1,4 +1,4 @@
-PACK=__attribute__ ((packed))
+PACK=__attribute__((packed)) __attribute__((ms_struct))
 OPT = -DUNIX -Dcdecl="" "-D__NO_ANONYMOUS_UNIONS__" "-DPACK=$(PACK)" -Dstrnicmp=strncasecmp -Dstricmp=strcasecmp -Ddp_ANET2 -I../../h
 COPT = $(FLAGS) $(OPT)
 

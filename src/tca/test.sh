@@ -16,6 +16,6 @@ COPT="${FLAGS} -DUNIX -Dcdecl= -D__NO_ANONYMOUS_UNIONS__ -Dstrnicmp=strncasecmp 
 
 mkdir tcat
 cd tcat
-gcc ${COPT} "-DPACK=__attribute__ ((packed))" -I../../../h -I../../dp -I../../../demo/utils ../tcat.c ../tca.c ../tcapw.c ../crypttab.c ../../3rdparty/d3des/d3des.c ../../3rdparty/md5/md5c.c ../../dp/assoctab.c ../../dp/dynatab.c ../../../demo/utils/eclock.c ../../dp/ptimer.c ../../../demo/utils/mywcs.c
+gcc ${COPT} "-DPACK=__attribute__((packed)) __attribute__((ms_struct))" -I../../../h -I../../dp -I../../../demo/utils ../tcat.c ../tca.c ../tcapw.c ../crypttab.c ../../3rdparty/d3des/d3des.c ../../3rdparty/md5/md5c.c ../../dp/assoctab.c ../../dp/dynatab.c ../../../demo/utils/eclock.c ../../dp/ptimer.c ../../../demo/utils/mywcs.c
 
 tcat

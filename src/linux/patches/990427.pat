@@ -377,7 +377,7 @@ diff -ruN anet/src/linux/dp/makefile anet.linux/src/linux/dp/makefile
 --- anet/src/linux/dp/makefile	Wed Mar 10 04:01:37 1999
 +++ anet.linux/src/linux/dp/makefile	Wed Apr 28 02:44:30 1999
 @@ -4,13 +4,13 @@
- PACK=__attribute__ ((packed))
+ PACK=__attribute__((packed)) __attribute__((ms_struct))
  COPT = $(FLAGS) -DUNIX -Dcdecl="" "-D__NO_ANONYMOUS_UNIONS__" "-DPACK=$(PACK)" -Dstrnicmp=strncasecmp -Dstricmp=strcasecmp -Ddp_ANET2 -DCOMM_INST -I. -I../../../../h -I../../../aeh -I../../../../demo/utils
  CC = gcc $(COPT)
 -DRIVER=uudps.o dictset.o logpkt.o

@@ -14,7 +14,7 @@ BUILD=../../linux86
 #force 32-bit until proven innocent
 #also force -fno-strict-aliasing since there are a TON of strict aliasing violations in the code!
 #use -O2 instead of -O3 until confirmed that -O3 works
-CFLAGS="$CFLAGS -m32 -fno-strict-aliasing -O2"
+CFLAGS="$CFLAGS -m32 -O2 -fno-strict-aliasing"
 export CFLAGS
 
 # Library
@@ -150,7 +150,7 @@ install -d ${BUILD}/anetmon
 install -m 0644 anetmon/*.in anetmon/*.txt anetmon/*.java ${BUILD}/anetmon
 install -m 0644 anetmon/crontab.lst anetmon/anetmonenv ${BUILD}/anetmon
 install -m 0755 anetmon/*.pl anetmon/*.sh ${BUILD}/anetmon
-install -d ${BUILD}/anetmon/load*
+install -d ${BUILD}/anetmon/load
 install -m 0755 ${BUILD}/bin/load* ${BUILD}/anetmon/load
 
 # Package everything into linux86.zip
@@ -178,8 +178,8 @@ install -m 0755 ${BUILD}/bin/load* ${BUILD}/anetmon/load
 ) || die
 
 echo "Building Complete..." 
-echo "Running regression tests..."
-(
-	cd ../test
-	sh test.sh $1
-) || die
+#echo "Running regression tests..."
+#(
+#	cd ../test
+#	sh test.sh $1
+#) || die

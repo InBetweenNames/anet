@@ -13,4 +13,4 @@ FLAGS='-DDEBUG -g -D_DEBUG'
 
 COPT="${FLAGS} -DUNIX -Dcdecl= -D__NO_ANONYMOUS_UNIONS__ -Dstrnicmp=strncasecmp -Dstricmp=strcasecmp -Ddp_ANET2"
 
-gcc ${COPT} "-DPACK=__attribute__ ((packed))" -I../../../h -I../../../demo/utils -I../../dp -I../../tca -I../../unix/server -I../../score dpscoret.c ../../../demo/utils/rawlin.c ../../../linux/lib/dp2s.a -lgdbm -lefence -o dpscort
+gcc ${COPT} "-DPACK=__attribute__((packed)) __attribute__((ms_struct))" -I../../../h -I../../../demo/utils -I../../dp -I../../tca -I../../unix/server -I../../score dpscoret.c ../../../demo/utils/rawlin.c ../../../linux/lib/dp2s.a -lgdbm -lefence -o dpscort

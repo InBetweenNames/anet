@@ -16,5 +16,5 @@ COPT="${FLAGS} -DUNIX -Dcdecl= -D__NO_ANONYMOUS_UNIONS__ -Dstrnicmp=strncasecmp 
 
 mkdir acctservd
 cd acctservd
-gcc ${COPT} "-DPACK=__attribute__ ((packed))" ../acctservd.c ../acctserv.c ../tcapw.c ../tcapwtab.c ../../antp/antpserv.c ../../../demo/utils/mywcs.c ../../3rdparty/d3des/d3des.c ../../3rdparty/md5/md5c.c ../../../demo/utils/eclock.c ../../dp/assoctab.c ../../dp/dynatab.c ../pwq.c ../../score/wmq.c ../../score/wmqfile.c -o acctservd
+gcc ${COPT} "-DPACK=__attribute__((packed)) __attribute__((ms_struct))" ../acctservd.c ../acctserv.c ../tcapw.c ../tcapwtab.c ../../antp/antpserv.c ../../../demo/utils/mywcs.c ../../3rdparty/d3des/d3des.c ../../3rdparty/md5/md5c.c ../../../demo/utils/eclock.c ../../dp/assoctab.c ../../dp/dynatab.c ../pwq.c ../../score/wmq.c ../../score/wmqfile.c -o acctservd
 cd ..

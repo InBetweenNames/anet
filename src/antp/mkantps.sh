@@ -16,5 +16,5 @@ COPT="${FLAGS} -DUNIX -Dcdecl= -D__NO_ANONYMOUS_UNIONS__ -Dstrnicmp=strncasecmp 
 
 mkdir antpservd
 cd antpservd
-gcc ${COPT} "-DPACK=__attribute__ ((packed))" ../antpservd.c ../antpserv.c ../../score/wmqfile.c -o antpservd
+gcc ${COPT} "-DPACK=__attribute__((packed)) __attribute__((ms_struct))" ../antpservd.c ../antpserv.c ../../score/wmqfile.c -o antpservd
 cd ..

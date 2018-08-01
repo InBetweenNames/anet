@@ -16,5 +16,5 @@ COPT="${FLAGS} -DUNIX -Dcdecl= -D__NO_ANONYMOUS_UNIONS__ -Dstrnicmp=strncasecmp 
 
 mkdir wmqdump
 cd wmqdump
-gcc ${COPT} "-DPACK=__attribute__ ((packed))" -I../../../h -I../../dp -I.. ../wmqdump.c ../wmq.c ../wmqfile.c -o wmqdump
+gcc ${COPT} "-DPACK=__attribute__((packed)) __attribute__((ms_struct))" -I../../../h -I../../dp -I.. ../wmqdump.c ../wmq.c ../wmqfile.c -o wmqdump
 cd ..

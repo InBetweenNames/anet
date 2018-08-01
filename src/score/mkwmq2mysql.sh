@@ -16,5 +16,5 @@ COPT="${FLAGS} -DUNIX -Dcdecl= -D__NO_ANONYMOUS_UNIONS__ -Dstrnicmp=strncasecmp 
 
 mkdir wmq2mysql
 cd wmq2mysql
-gcc ${COPT} "-DPACK=__attribute__ ((packed))" -I../../../h -I../../dp -I.. ../wmq2mysql.c ../wmq.c ../wmqfile.c ../scorerep.c ../../dp/assoctab.c ../../dp/dynatab.c -lmysqlclient -o wmq2mysql
+gcc ${COPT} "-DPACK=__attribute__((packed)) __attribute__((ms_struct))" -I../../../h -I../../dp -I.. ../wmq2mysql.c ../wmq.c ../wmqfile.c ../scorerep.c ../../dp/assoctab.c ../../dp/dynatab.c -lmysqlclient -o wmq2mysql
 cd ..
